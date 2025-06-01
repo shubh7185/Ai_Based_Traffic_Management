@@ -6,71 +6,49 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-import numpy as np
-import os
-import torch
-from inference import get_model
-import supervision as sv
-# try:
-#     import torch
-#     PYTORCH_AVAILABLE = True
-#     st.sidebar.success("✅ PyTorch loaded")
-# except Exception as e:
-#     st.sidebar.warning(f"⚠️ PyTorch not available: {e}")
-#     class DummyTorch:
-#         def __init__(self):
-#             self.cuda = type('cuda', (), {'is_available': lambda: False})()
-#     torch = DummyTorch()
-
-# try:
-#     from inference import get_model
-# except Exception as e:
-#     st.sidebar.warning(f"⚠️ Inference package not available: {e}")
-#     get_model = None
-
-# try:
-#     import supervision as sv
-# except Exception as e:
-#     st.sidebar.warning(f"⚠️ Supervision package not available: {e}")
-#     sv = None
-
-# Try to import OpenCV
+# import numpy as np
+# import os
+# import torch
+# from inference import get_model
+# import supervision as sv
+# OpenCV
 try:
     import cv2
 except ImportError as e:
-    st.error(f"❌ Failed to import OpenCV: {e}. Please make sure 'opencv-python-headless' is in requirements.txt.")
+    st.error(f"❌ Failed to import OpenCV: {e}")
+    cv2 = None
 
-# # Try to import numpy
-# import numpy as np
+# NumPy
+try:
+    import numpy as np
+except ImportError as e:
+    st.error(f"❌ Failed to import NumPy: {e}")
+    np = None
 
-# # # Handle PyTorch with fallback
-# # PYTORCH_AVAILABLE = False
-# # try:
-# #     import torch
-# #     PYTORCH_AVAILABLE = True
-# #     st.sidebar.success("✅ PyTorch loaded")
-# # except ImportError as e:
-# #     st.sidebar.warning(f"⚠️ PyTorch not available: {e}. Some features may be limited.")
-# #     # Create dummy torch module to prevent errors
-# #     class DummyTorch:
-# #         def __init__(self):
-# #             self.cuda = type('cuda', (), {'is_available': lambda: False})()
-# #     torch = DummyTorch()
+# PyTorch
+try:
+    import torch
+    st.sidebar.success("✅ PyTorch loaded")
+except ImportError as e:
+    st.sidebar.warning(f"⚠️ PyTorch not available: {e}. Some features may be limited.")
+    torch = None
 
-# # Try importing other packages
-# # try:
-# #     from inference import get_model
-# # except ImportError as e:
-# #     st.sidebar.warning(f"⚠️ Inference package not available: {e}")
-# #     get_model = None
+# Inference
+try:
+    from inference import get_model
+except ImportError as e:
+    st.sidebar.warning(f"⚠️ Inference package not available: {e}")
+    get_model = None
 
-# # try:
-# #     import supervision as sv
-# # except ImportError as e:
-# #     st.sidebar.warning(f"⚠️ Supervision package not available: {e}")
-# #     sv = None
+# Supervision
+try:
+    import supervision as sv
+except ImportError as e:
+    st.sidebar.warning(f"⚠️ Supervision package not available: {e}")
+    sv = None
 
-# import os
+
+import os
 
 
 
