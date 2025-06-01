@@ -1,19 +1,16 @@
 import streamlit as st
-import subprocess
-import sys
-# Import essential packages first
-try:
-    import cv2
-except ImportError:
-    st.error("Installing OpenCV...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "opencv-python-headless==4.8.0.74"])
-    import cv2
 
+# Try to import OpenCV
+try:
+    import cv2
+except ImportError as e:
+    st.error(f"❌ Failed to import OpenCV: {e}. Please make sure 'opencv-python-headless' is in requirements.txt.")
+
+# Try to import numpy
 try:
     import numpy as np
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
-    import numpy as np
+except ImportError as e:
+    st.error(f"❌ Failed to import NumPy: {e}. Please make sure 'numpy' is in requirements.txt.")
 
 # Handle PyTorch with fallback
 PYTORCH_AVAILABLE = False
@@ -21,8 +18,8 @@ try:
     import torch
     PYTORCH_AVAILABLE = True
     st.sidebar.success("✅ PyTorch loaded")
-except ImportError:
-    st.sidebar.warning("⚠️ PyTorch not available. Some features may be limited.")
+except ImportError as e:
+    st.sidebar.warning(f"⚠️ PyTorch not available: {e}. Some features may be limited.")
     # Create dummy torch module to prevent errors
     class DummyTorch:
         def __init__(self):
@@ -32,15 +29,16 @@ except ImportError:
 # Try importing other packages
 try:
     from inference import get_model
-except ImportError:
-    st.sidebar.warning("⚠️ Inference package not available")
+except ImportError as e:
+    st.sidebar.warning(f"⚠️ Inference package not available: {e}")
     get_model = None
 
 try:
     import supervision as sv
-except ImportError:
-    st.sidebar.warning("⚠️ Supervision package not available")
+except ImportError as e:
+    st.sidebar.warning(f"⚠️ Supervision package not available: {e}")
     sv = None
+
 import os
 
 
