@@ -11,7 +11,6 @@ import os
 import torch
 from inference import get_model
 import supervision as sv
-import subprocess
 # try:
 #     import torch
 #     PYTORCH_AVAILABLE = True
