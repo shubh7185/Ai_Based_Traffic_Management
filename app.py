@@ -1,4 +1,11 @@
+
 import streamlit as st
+# At the top of your app after imports
+st.set_page_config(
+    page_title="Smart Traffic Management",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 # Try to import OpenCV
 try:
@@ -42,13 +49,7 @@ except ImportError as e:
 import os
 
 
-# At the top of your app after imports
-st.set_page_config(
-    page_title="Smart Traffic Management",
-    page_icon="🚦",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+
 
 # Custom CSS for modern UI
 st.markdown("""
