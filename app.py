@@ -1,4 +1,5 @@
 import streamlit as st
+import subprocess
 # Import essential packages first
 try:
     import cv2
@@ -40,7 +41,7 @@ except ImportError:
     st.sidebar.warning("⚠️ Supervision package not available")
     sv = None
 import os
-import subprocess
+
 
 # At the top of your app after imports
 st.set_page_config(
