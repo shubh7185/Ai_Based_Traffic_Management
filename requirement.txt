@@ -1,11 +1,22 @@
-streamlit
+# Specify Python version compatible packages
+streamlit==1.28.1
 opencv-python-headless==4.8.0.74
 numpy==1.24.3
+Pillow==10.0.1
+
+# PyTorch for CPU only - more compatible version
 torch==2.0.0
-torchvision==0.15.0
+torchvision==0.15.1
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Rest of dependencies
+pandas==2.0.3
+matplotlib==3.7.2
+seaborn==0.12.2
+scipy==1.11.1
+PyYAML==6.0.1
+tqdm==4.66.1
+requests==2.31.0
 supervision
-inference
 roboflow
-pillow
-matplotlib
-pandas
+inference
