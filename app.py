@@ -1,15 +1,45 @@
 import streamlit as st
+# Import essential packages first
 try:
     import cv2
-    st.success(f"✅ OpenCV imported successfully. Version: {cv2.__version__}")
-except Exception as e:
-    st.error(f"❌ OpenCV import failed: {e}")
+except ImportError:
+    st.error("Installing OpenCV...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "opencv-python-headless==4.8.0.74"])
+    import cv2
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "numpy"])
+    import numpy as np
+
+# Handle PyTorch with fallback
+PYTORCH_AVAILABLE = False
+try:
+    import torch
+    PYTORCH_AVAILABLE = True
+    st.sidebar.success("✅ PyTorch loaded")
+except ImportError:
+    st.sidebar.warning("⚠️ PyTorch not available. Some features may be limited.")
+    # Create dummy torch module to prevent errors
+    class DummyTorch:
+        def __init__(self):
+            self.cuda = type('cuda', (), {'is_available': lambda: False})()
+    torch = DummyTorch()
+
+# Try importing other packages
+try:
+    from inference import get_model
+except ImportError:
+    st.sidebar.warning("⚠️ Inference package not available")
+    get_model = None
+
+try:
+    import supervision as sv
+except ImportError:
+    st.sidebar.warning("⚠️ Supervision package not available")
+    sv = None
 import os
-import torch
-from inference import get_model
-import supervision as sv
 import subprocess
 
 # At the top of your app after imports
