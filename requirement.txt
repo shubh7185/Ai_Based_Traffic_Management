@@ -1,14 +1,11 @@
-# Python packages
 streamlit==1.28.1
 opencv-python-headless==4.8.0.74
 numpy==1.24.3
 Pillow==10.0.1
 
-# PyTorch (CPU)
 torch==2.0.0
 torchvision==0.15.1
 
-# Additional data science libraries
 pandas==2.0.3
 matplotlib==3.7.2
 seaborn==0.12.2
@@ -17,6 +14,5 @@ PyYAML==6.0.1
 tqdm==4.66.1
 requests==2.31.0
 
-# External and computer vision packages
 supervision==0.14.0
 roboflow==1.1.18
