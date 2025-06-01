@@ -1,5 +1,10 @@
 import streamlit as st
-import cv2
+try:
+    import cv2
+    st.success(f"✅ OpenCV imported successfully. Version: {cv2.__version__}")
+except Exception as e:
+    st.error(f"❌ OpenCV import failed: {e}")
+
 import numpy as np
 import os
 import torch
