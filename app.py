@@ -6,7 +6,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-import cv2
 import numpy as np
 import os
 import torch
@@ -36,11 +35,11 @@ import subprocess
 #     st.sidebar.warning(f"⚠️ Supervision package not available: {e}")
 #     sv = None
 
-# # Try to import OpenCV
-# try:
-#     import cv2
-# except ImportError as e:
-#     st.error(f"❌ Failed to import OpenCV: {e}. Please make sure 'opencv-python-headless' is in requirements.txt.")
+# Try to import OpenCV
+try:
+    import cv2
+except ImportError as e:
+    st.error(f"❌ Failed to import OpenCV: {e}. Please make sure 'opencv-python-headless' is in requirements.txt.")
 
 # # Try to import numpy
 # import numpy as np
